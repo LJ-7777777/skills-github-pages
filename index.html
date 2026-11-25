@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小组项目作品集 · 寸金校园导航系统</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", "PingFang SC", sans-serif;
+        }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #dbeafe 0%, #e9e5ff 45%, #fce7f3 100%);
+            color: #1e293b;
+            padding: 40px 20px 60px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        body::before, body::after {
+            content: "";
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.35;
+            z-index: 0;
+        }
+        body::before {
+            width: 360px;
+            height: 360px;
+            background: #93c5fd;
+            top: -100px;
+            left: -100px;
+        }
+        body::after {
+            width: 320px;
+            height: 320px;
+            background: #c4b5fd;
+            bottom: -80px;
+            right: -80px;
+        }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 48px;
+            padding: 56px 28px;
+            background: rgba(255,255,255,0.5);
+            backdrop-filter: blur(14px);
+            border-radius: 28px;
+            border: 1px solid rgba(255,255,255,0.75);
+            box-shadow: 0 16px 40px rgba(99, 102, 241, 0.12);
+        }
+        .hero .badge {
+            display: inline-block;
+            padding: 7px 18px;
+            background: linear-gradient(135deg, #bfdbfe, #ddd6fe);
+            color: #4338ca;
+            border-radius: 999px;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+        .hero h1 {
+            font-size: 38px;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 16px;
+        }
+        .hero p {
+            font-size: 16px;
+            color: #64748b;
+            line-height: 1.9;
+            max-width: 660px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: 44px;
+        }
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1e3a8a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+        .section-title::before {
+            content: "";
+            width: 6px;
+            height: 22px;
+            border-radius: 4px;
+            background: linear-gradient(180deg, #3b82f6, #8b5cf6);
+        }
+
+        .member-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        .member-card {
+            background: rgba(255,255,255,0.72);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 28px;
+            border: 1px solid rgba(255,255,255,0.8);
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.1);
+            transition: 0.28s;
+        }
+        .member-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 32px rgba(99, 102, 241, 0.18);
+        }
+        .member-head {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .avatar {
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 22px;
+            font-weight: 700;
+            flex-shrink: 0;
+            box-shadow: 0 6px 16px rgba(96, 165, 250, 0.35);
+        }
+        .member-info h3 {
+            font-size: 18px;
+            color: #1e293b;
+            margin-bottom: 5px;
+        }
+        .member-info .part {
+            font-size: 14px;
+            color: #6366f1;
+        }
+        .member-contact {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 14px;
+            line-height: 1.8;
+        }
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .skill-tags span {
+            padding: 6px 13px;
+            background: #f1f5f9;
+            border-radius: 9px;
+            font-size: 13px;
+            color: #475569;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+        .tech-box {
+            background: rgba(255,255,255,0.72);
+            border-radius: 18px;
+            padding: 24px;
+            border: 1px solid rgba(255,255,255,0.8);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.08);
+        }
+        .tech-box h4 {
+            font-size: 16px;
+            color: #1e3a8a;
+            margin-bottom: 14px;
+        }
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .tag {
+            padding: 8px 16px;
+            background: #f0f7ff;
+            border-radius: 999px;
+            color: #3b82f6;
+            font-size: 14px;
+        }
+
+        .project-card {
+            background: rgba(255,255,255,0.78);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 40px 34px;
+            border: 1px solid rgba(255,255,255,0.85);
+            box-shadow: 0 12px 36px rgba(99, 102, 241, 0.14);
+            text-align: center;
+        }
+        .project-card h2 {
+            font-size: 26px;
+            color: #1e293b;
+            margin-bottom: 28px;
+        }
+        .btn-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        a.btn {
+            text-decoration: none;
+            padding: 13px 30px;
+            border-radius: 13px;
+            font-size: 15px;
+            transition: 0.25s;
+        }
+        .btn-source {
+            border: 1px solid #6366f1;
+            color: #6366f1;
+            background: rgba(255,255,255,0.8);
+        }
+        .btn-preview {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: #fff;
+            box-shadow: 0 6px 18px rgba(99, 102, 241, 0.35);
+        }
+        a.btn:hover {
+            transform: translateY(-3px);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 27px; }
+            .project-card { padding: 28px 22px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- 顶部介绍 -->
+        <div class="hero">
+            <span class="badge">C 语言课程项目 · 作品展示</span>
+            <h1>双人小组项目作品集</h1>
+            <p>
+                本页面展示我们小组用 C 语言共同完成的「寸金校园导航系统」项目，可以查看全部源代码，也可查看项目演示效果。
+            </p>
+        </div>
+
+        <!-- 小组成员 -->
+        <div class="section">
+            <h2 class="section-title">小组成员</h2>
+            <div class="member-group">
+                <div class="member-card">
+                    <div class="member-head">
+                        <div class="avatar">A</div>
+                        <div class="member-info">
+                            <h3>组员 白宇正 </h3>
+                            <p class="part">负责界面与交互部分</p>
+                        </div>
+                    </div>
+                    <p class="member-contact">联系邮箱：xxx@qq.com</p>
+                    <div class="skill-tags">
+                        <span>C 语言</span>
+                        <span>结构体</span>
+                        <span>指针</span>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <div class="member-head">
+                        <div class="avatar">B</div>
+                        <div class="member-info">
+                            <h3>组员 李骏 </h3>
+                            <p class="part">负责数据与逻辑部分</p>
+                        </div>
+                    </div>
+                    <p class="member-contact">联系邮箱：xxx@qq.com</p>
+                    <div class="skill-tags">
+                        <span>C 语言</span>
+                        <span>数据结构</span>
+                        <span>路径算法</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 使用技术（C 语言相关） -->
+        <div class="section">
+            <h2 class="section-title">使用技术</h2>
+            <div class="tech-grid">
+                <div class="tech-box">
+                    <h4>编程语言与基础</h4>
+                    <div class="tag-list">
+                        <span>C 语言</span>
+                        <span>结构体</span>
+                        <span>指针</span>
+                        <span>数组</span>
+                        <span>文件操作</span>
+                    </div>
+                </div>
+                <div class="tech-box">
+                    <h4>数据结构与算法</h4>
+                    <div class="tag-list">
+                        <span>链表</span>
+                        <span>图结构</span>
+                        <span>最短路径</span>
+                        <span>查找与排序</span>
+                        <span>递归</span>
+                    </div>
+                </div>
+                <div class="tech-box">
+                    <h4>开发与编译工具</h4>
+                    <div class="tag-list">
+                        <span>GCC</span>
+                        <span>Dev-C++</span>
+                        <span>VS Code</span>
+                        <span>Git</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 项目作品：仅标题 + 两个按钮 -->
+        <div class="section">
+            <h2 class="section-title">项目作品</h2>
+            <div class="project-card">
+                <h2>寸金校园导航系统</h2>
+                <div class="btn-group">
+                    <!-- 源码按钮：跳转GitHub仓库 -->
+                    <a class="btn btn-source" href="https://github.com/LJ-77777777/skills-github-pages" target="_blank">查看源码</a>
+                    <!-- 在线预览按钮：C 语言程序无法直接在网页运行，可改为演示截图/录屏链接 -->
+                    <a class="btn btn-preview" href="这里填演示截图或录屏链接" target="_blank">在线预览</a>
+                </div>
+            </div>
+        </div>
+
+        <footer>© 2026 小组项目作品集 · 寸金校园导航系统</footer>
+    </div>
+</body>
+</html>
