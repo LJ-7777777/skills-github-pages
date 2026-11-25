@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>双人小组项目作品集</title>
+    <style>
+        :root {
+            --main-color: #4080ff;
+            --text: #222;
+            --text-light: #555;
+            --card-bg: rgba(255, 255, 255, 0.65);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        body {
+            min-height: 100vh;
+            color: var(--text);
+            position: relative;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #e8f4ff, #f0eaff, #fff4f8);
+        }
+        /* 浮动光斑 */
+        .blob {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(70px);
+            opacity: 0.6;
+            z-index: -1;
+            animation: float 8s ease-in-out infinite;
+        }
+        .b1 {
+            width: 320px;
+            height: 320px;
+            background: #a6c8ff;
+            top: 10%;
+            left: 8%;
+            animation-delay: 0s;
+        }
+        .b2 {
+            width: 260px;
+            height: 260px;
+            background: #e4cfff;
+            bottom: 15%;
+            right: 10%;
+            animation-delay: -2.5s;
+        }
+        .b3 {
+            width: 220px;
+            height: 220px;
+            background: #ffd6e8;
+            top: 50%;
+            right: 25%;
+            animation-delay: -5s;
+        }
+        @keyframes float {
+            0% { transform: translate(0,0) scale(1); }
+            50% { transform: translate(30px,-25px) scale(1.05); }
+            100% { transform: translate(0,0) scale(1); }
+        }
+        .container {
+            max-width: 1050px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid rgba(100,140,220,0.25);
+        }
+        header h1 {
+            color: var(--main-color);
+            margin-bottom: 12px;
+            font-size: 2.2rem;
+        }
+        .member-wrap {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 18px;
+        }
+        .member-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 16px 24px;
+            border-radius: 12px;
+            min-width: 220px;
+            box-shadow: 0 4px 16px rgba(60,90,160,0.12);
+        }
+        .member-card h3 {
+            color: var(--main-color);
+            margin-bottom: 6px;
+        }
+        .member-card p {
+            color: var(--text-light);
+            font-size:14px;
+            line-height: 1.5;
+        }
+        section {
+            margin-bottom: 42px;
+        }
+        section h2 {
+            color: var(--main-color);
+            margin-bottom:20px;
+            border-left:4px solid var(--main-color);
+            padding-left:12px;
+        }
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap:10px;
+        }
+        .tag {
+            background: rgba(255,255,255,0.7);
+            padding:7px 14px;
+            border-radius: 99px;
+            font-size:14px;
+            color: #366acc;
+            box-shadow: 0 2px 8px rgba(60,90,160,0.08);
+        }
+        .project-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px,1fr));
+            gap:24px;
+        }
+        .project-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding:22px;
+            border-radius:14px;
+            transition: 0.35s ease;
+            box-shadow: 0 4px 18px rgba(60,90,160,0.1);
+        }
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 28px rgba(60,90,160,0.16);
+        }
+        .project-card h3 {
+            color:#1a3366;
+            margin-bottom:8px;
+        }
+        .project-time {
+            color:#777;
+            font-size:13px;
+            margin-bottom:12px;
+        }
+        .project-desc {
+            color: var(--text-light);
+            font-size:14px;
+            margin-bottom:14px;
+        }
+        .work-split {
+            display: flex;
+            gap:12px;
+            margin-bottom:14px;
+            flex-wrap: wrap;
+        }
+        .work-item {
+            flex:1;
+            min-width:120px;
+            background: rgba(255,255,255,0.75);
+            padding:10px;
+            border-radius:9px;
+        }
+        .work-item .name {
+            color: #366acc;
+            font-weight:bold;
+            font-size:14px;
+            margin-bottom:4px;
+        }
+        .work-item p {
+            font-size:13px;
+            color:#444;
+        }
+        .project-tech {
+            display:flex;
+            flex-wrap:wrap;
+            gap:6px;
+            margin-bottom:16px;
+        }
+        .project-tech span {
+            background: rgba(255,255,255,0.7);
+            font-size:12px;
+            padding:4px 8px;
+            border-radius:4px;
+            color:#366acc;
+        }
+        .btn-group a {
+            display:inline-block;
+            text-decoration:none;
+            padding:7px 14px;
+            border-radius:8px;
+            font-size:14px;
+            margin-right:8px;
+            transition:0.25s;
+        }
+        .btn-preview {
+            background: var(--main-color);
+            color:#fff;
+        }
+        .btn-preview:hover{
+            background:#2b68dd;
+        }
+        .btn-github {
+            border:1px solid var(--main-color);
+            color: var(--main-color);
+            background: rgba(255,255,255,0.6);
+        }
+        .btn-github:hover{
+            background:rgba(64,128,255,0.1);
+        }
+        footer {
+            text-align:center;
+            margin-top:60px;
+            color:#777;
+            font-size:14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 炫酷浮动光斑 -->
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+
+    <div class="container">
+        <header>
+            <h1>双人小组项目作品集</h1>
+            <div class="member-wrap">
+                <div class="member-card">
+                    <h3>组员A（你的名字）</h3>
+                    <p>岗位：前端 / 后端</p>
+                    <p>邮箱：xxx@qq.com</p>
+                </div>
+                <div class="member-card">
+                    <h3>组员B（搭档名字）</h3>
+                    <p>岗位：前端 / 后端</p>
+                    <p>邮箱：xxx@qq.com</p>
+                </div>
+            </div>
+        </header>
+
+        <section>
+            <h2>技术栈</h2>
+            <div class="skill-tags">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">Vue</span>
+                <span class="tag">Git</span>
+                <span class="tag">Node.js</span>
+            </div>
+        </section>
+
+        <section>
+            <h2>小组项目</h2>
+            <div class="project-list">
+                <div class="project-card">
+                    <h3>项目名称</h3>
+                    <div class="project-time">2026.09 - 2026.11</div>
+                    <div class="project-desc">项目整体描述：这个项目实现什么功能、解决什么问题。</div>
+                    <div class="work-split">
+                        <div class="work-item">
+                            <div class="name">组员A（你）</div>
+                            <p>负责：页面布局、前端交互、数据展示</p>
+                        </div>
+                        <div class="work-item">
+                            <div class="name">组员B（搭档）</div>
+                            <p>负责：后端接口、数据库、登录逻辑</p>
+                        </div>
+                    </div>
+                    <div class="project-tech">
+                        <span>Vue3</span>
+                        <span>Express</span>
+                        <span>MySQL</span>
+                    </div>
+                    <div class="btn-group">
+                        <a href="https://github.com/小组仓库地址" class="btn-github" target="_blank">源码</a>
+                        <a href="在线预览地址" class="btn-preview" target="_blank">在线预览</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            © 2026 双人小组作品集
+        </footer>
+    </div>
+</body>
+</html>
